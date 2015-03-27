@@ -9,6 +9,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
+import static java.util.Comparator.comparing;
 
 public class ScoreCalculator {
 
@@ -40,25 +41,10 @@ public class ScoreCalculator {
             }
         }
 
-        ArrayList<Team> list = new ArrayList<>(teams);
-//        Collections.sort(list, Comparator.comparing(Team::getPoints).reversed());
+        ArrayList<Team> sortedTeams = new ArrayList<>(teams);
+        sortedTeams.sort(comparing(Team::getPoints).thenComparing(Team::getGoalDiff).reversed());
 
-
-        list.sort((lhs, rhs) -> {
-            if (lhs.getPoints().equals(rhs.getPoints())) {
-                return rhs.getGoalDiff() - lhs.getGoalDiff();
-            } else {
-                return rhs.getPoints().compareTo(lhs.getPoints());
-            }
-        });
-
-//        return new TreeSet<Team>(new Comparator<Team>() {
-//            public int compare(Team t1, Team t2) {
-//                return Integer.valueOf(t1.points).compareTo(Integer.valueOf(t2.points));
-//            }
-//        });
-
-        return list;
+        return sortedTeams;
     }
 
     private Set<Team> extractTeams(List<Game> games) {
