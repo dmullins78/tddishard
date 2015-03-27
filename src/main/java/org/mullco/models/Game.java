@@ -6,5 +6,12 @@ public class Game {
     public Team away;
     public Integer homeScore;
     public Integer awayScore;
-    public Season season;
+
+    public Game(Team home, int homeScore, Team away, int awayScore) {
+        this.home = home;
+        this.homeScore = homeScore;
+        this.away = away;
+        this.awayScore = awayScore;
+    }
+
 }
