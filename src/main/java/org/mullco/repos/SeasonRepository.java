@@ -14,11 +14,21 @@ import java.util.List;
 import static java.util.Arrays.asList;
 
 public class SeasonRepository {
+
+
+    private DataSource dataSource;
+
+    public SeasonRepository() {
+        this(new DatabaseConfig().getDataSource());
+    }
+
+    public SeasonRepository(DataSource ds) {
+        dataSource = ds;
+    }
+
     public List<Game> getGames() {
         Connection con = null;
         try {
-            DataSource dataSource = new DatabaseConfig().getDataSource();
-
             con = dataSource.getConnection();
             Statement stmt = con.createStatement();
 

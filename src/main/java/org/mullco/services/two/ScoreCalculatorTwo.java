@@ -1,28 +1,29 @@
-package org.mullco.services;
+package org.mullco.services.two;
 
 import org.mullco.models.Game;
 import org.mullco.models.Team;
 import org.mullco.repos.SeasonRepository;
-import thirdparty.FifaPointsService;
+import org.mullco.repos.two.PointsRepo;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 import static java.util.Comparator.comparing;
 
-public class ScoreCalculator {
+public class ScoreCalculatorTwo {
 
-    private final Integer winPoints;
-    private final Integer tiePoints;
+    PointsRepo pointsRepo;
+    SeasonRepository seasonRepository;
 
-    public ScoreCalculator() {
-        winPoints = FifaPointsService.getWinPoints();
-        tiePoints = FifaPointsService.getTiePoints();
+    public ScoreCalculatorTwo(SeasonRepository seasonRepository, PointsRepo pointsRepo) {
+        this.seasonRepository = seasonRepository;
+        this.pointsRepo = pointsRepo;
     }
 
     public List<Team> getStandings() {
-        SeasonRepository seasonRepository = new SeasonRepository();
         List<Game> games = seasonRepository.getGames();
 
         Set<Team> teams = extractTeams(games);
@@ -56,7 +57,7 @@ public class ScoreCalculator {
 
     private void winner(Set<Team> teams, Team team, int goalDiff) {
         Team winner = getTeam(teams, team.id);
-        winner.points += winPoints;
+        winner.points += pointsRepo.getWinPoints();
         winner.goalDifferential += goalDiff;
     }
 
@@ -66,7 +67,7 @@ public class ScoreCalculator {
     }
 
     private void tie(Set<Team> teams, Team team) {
-        getTeam(teams, team.id).points += tiePoints;
+        getTeam(teams, team.id).points += pointsRepo.getTiePoints();
     }
 
     private Team getTeam(Set<Team> teams, Long teamId) {

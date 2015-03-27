@@ -1,4 +1,4 @@
-package org.mullco.services;
+package org.mullco.services.one;
 
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.destination.DataSourceDestination;
@@ -54,7 +54,7 @@ public class ScoreCalculatorTest {
         DbSetup dbSetup = new DbSetup(destination, setupOperation);
         dbSetup.launch();
 
-        List<Team> standings = new ArrayList<>(calculator.getStandings());
+        List<Team> standings = calculator.getStandings();
 
         assertThat(standings.get(0).points, is(3));
         assertThat(standings.get(0).goalDifferential, is(3));
@@ -70,7 +70,7 @@ public class ScoreCalculatorTest {
         DbSetup dbSetup2 = new DbSetup(destination, week2Games);
         dbSetup2.launch();
 
-        List<Team> week2Standings = new ArrayList<>(calculator.getStandings());
+        List<Team> week2Standings = calculator.getStandings();
 
         assertThat(week2Standings.get(0).name, is("1"));
         assertThat(week2Standings.get(0).points, is(3));
