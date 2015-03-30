@@ -11,5 +11,6 @@ At April's CIJUG, [Dan Mullins] will walk through his personal unit testing evol
 [Working Effectively with Unit Tests]: https://leanpub.com/wewut
 [Jay Fields]: https://twitter.com/thejayfields
 [Dan Mullins]: https://twitter.com/dmullins
+[DRY]: http://en.wikipedia.org/wiki/Don%27t_repeat_yourself
 
 
