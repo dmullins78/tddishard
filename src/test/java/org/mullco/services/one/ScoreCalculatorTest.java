@@ -8,12 +8,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mullco.models.Team;
 import org.mullco.repos.DatabaseConfig;
+import thirdparty.FifaSettings;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.ninja_squad.dbsetup.Operations.deleteAllFrom;
 import static com.ninja_squad.dbsetup.Operations.insertInto;
 import static com.ninja_squad.dbsetup.Operations.sequenceOf;
 import static org.hamcrest.CoreMatchers.is;
@@ -28,6 +27,8 @@ public class ScoreCalculatorTest {
     public void setUp() throws Exception {
         DataSource dataSource = new DatabaseConfig().getDataSource();
         destination = DataSourceDestination.with(dataSource);
+
+        FifaSettings.setUrl("http://localhost:4567");
 
         calculator = new ScoreCalculator();
     }
