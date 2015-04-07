@@ -42,20 +42,6 @@ public class ScoreCalculatorThreeTest {
     }
 
     @Test
-    public void shouldCalculateFirstPlace() throws Exception {
-        List<Team> standings = calculator.getStandings();
-
-        verifyTeam(standings, 0, 3, 3);
-    }
-
-    @Test
-    public void shouldCalculateSecondPlace() throws Exception {
-        List<Team> standings = calculator.getStandings();
-
-        verifyTeam(standings, 1, 0, -3);
-    }
-
-    @Test
     public void shouldRankByPointsAndGoalDifferential() throws Exception {
         Team one = new Team(1l, "1");
         Team two = new Team(2l, "2");
@@ -76,6 +62,20 @@ public class ScoreCalculatorThreeTest {
 
     }
 
+    @Test
+    public void shouldCalculateFirstPlace() throws Exception {
+        List<Team> standings = calculator.getStandings();
+
+        verifyTeam(standings, 0, 3, 3);
+    }
+
+    @Test
+    public void shouldCalculateSecondPlace() throws Exception {
+        List<Team> standings = calculator.getStandings();
+
+        verifyTeam(standings, 1, 0, -3);
+    }
+    
     private void verifyTeam(List<Team> standings, int index, int points, int goalDiff) {
         assertThat(standings.get(index).points, is(points));
         assertThat(standings.get(index).goalDifferential, is(goalDiff));
