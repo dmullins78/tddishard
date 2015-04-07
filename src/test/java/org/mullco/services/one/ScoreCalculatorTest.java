@@ -54,33 +54,6 @@ public class ScoreCalculatorTest {
 
         // act
         List<Team> standings = calculator.getStandings();
-
-        // assert
-        assertThat(standings.get(0).points, is(3));
-        assertThat(standings.get(0).goalDifferential, is(3));
-        assertThat(standings.get(1).points, is(0));
-        assertThat(standings.get(1).goalDifferential, is(-3));
-
-        // arrange
-        Operation week2Games = sequenceOf(
-                insertInto("GAMES")
-                        .columns("ID", "HOME_TEAM", "HOME_TEAM_SCORE", "AWAY_TEAM", "AWAY_TEAM_SCORE")
-                        .values(3, 2, 3, 3, 0)
-                        .build());
-
-        DbSetup dbSetup2 = new DbSetup(destination, week2Games);
-        dbSetup2.launch();
-
-        // act
-        List<Team> week2Standings = calculator.getStandings();
-
-        // assert
-        assertThat(week2Standings.get(0).name, is("1"));
-        assertThat(week2Standings.get(0).points, is(3));
-        assertThat(week2Standings.get(0).goalDifferential, is(3));
-        assertThat(week2Standings.get(1).name, is("2"));
-        assertThat(week2Standings.get(1).points, is(3));
-        assertThat(week2Standings.get(1).goalDifferential, is(0));
     }
 
 }

@@ -14,12 +14,14 @@ public class FifaPointsService {
     }
 
     private static Integer getFifaValue(String uri) {
-        if (FifaSettings.getUrl() == null) {
+        String fifaUrl = FifaSettings.getUrl();
+
+        if (fifaUrl == null) {
             throw new IllegalArgumentException("No Fifa URL Provided");
         }
 
         try {
-            String points = new Resty().text(FifaSettings.getUrl() + uri).toString();
+            String points = new Resty().text(fifaUrl + uri).toString();
             System.out.println(uri + " points = " + points);
 
             return Integer.valueOf(points);

@@ -38,7 +38,7 @@ public class ScoreCalculatorFourTest {
         when(pointsRepo.getWinPoints()).thenReturn(3);
         when(pointsRepo.getTiePoints()).thenReturn(1);
 
-        builder = new ScoreCalculatorTestBuilder();
+            builder = new ScoreCalculatorTestBuilder();
     }
 
     @Test
